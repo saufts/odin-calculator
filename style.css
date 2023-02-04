@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+    gap: 3px;
+}
+
+.btns {
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+    gap: 3px;
+}
