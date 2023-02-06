@@ -1,7 +1,6 @@
 let outputDisplay = document.querySelector('.output-display');
 outputDisplay.textContent = ``;
 
-
 let numTmp = 0;
 let numCounter = 0;
 
@@ -16,7 +15,6 @@ let i = 0;
 
 let isCalculated = false;
 
-
 const dig0 = document.querySelector('#dig0');
 const dig1 = document.querySelector('#dig1');
 const dig2 = document.querySelector('#dig2');
@@ -27,7 +25,6 @@ const dig6 = document.querySelector('#dig6');
 const dig7 = document.querySelector('#dig7');
 const dig8 = document.querySelector('#dig8');
 const dig9 = document.querySelector('#dig9');
-
 
 const equalsSign = document.querySelector('#equals');
 const plusSign = document.querySelector('#plus');
@@ -43,6 +40,21 @@ const enterDigit = function(digit) {
         outputDisplay.textContent += `${digit}`;
         numTmp = `${digit}`;
     }   
+}
+
+const enterOperator = function(operator) {
+    if(numCounter === 0 && !isCalculated) {
+        num1 = parseFloat(numTmp);
+        numTmp = 0;
+        outputDisplay.textContent += `${operator}`;
+        sign = `${operator}`;
+        numCounter++; 
+        
+    } else if (isCalculated) {
+        num1 = result;
+        outputDisplay.textContent += `${operator}`;
+        sign = `${operator}`;
+    }
 }
 
 const initializeDigitButtons = function() {
@@ -87,36 +99,19 @@ const initializeDigitButtons = function() {
     });
 }
 
+const initializeSymbolButtons = function() {
+
+    plusSign.addEventListener('click', () => {
+        enterOperator('+');
+    });
+    
+    asteriskSign.addEventListener('click', () => {
+        enterOperator('*');
+    });
+}
+
 initializeDigitButtons();
-
-plusSign.addEventListener('click', () => {
-    if(numCounter === 0 && !isCalculated) {
-        num1 = parseFloat(numTmp);
-        numTmp = 0;
-        outputDisplay.textContent += '+';
-        sign = '+';
-        numCounter++; 
-    } else if (isCalculated) {
-        num1 = result;
-        outputDisplay.textContent += '+';
-        sign = '+';
-    }
-});
-
-asteriskSign.addEventListener('click', () => {
-    if(numCounter === 0 && !isCalculated) {
-        num1 = parseFloat(numTmp);
-        numTmp = 0;
-        outputDisplay.textContent += '*';
-        sign = '*';
-        numCounter++; 
-    } else if (isCalculated) {
-        num1 = result;
-        outputDisplay.textContent += '*';
-        sign = '*';
-    } 
-});
-
+initializeSymbolButtons();
 
 equalsSign.addEventListener('click', () => {
     num2 = parseFloat(numTmp);
