@@ -7,11 +7,14 @@ let numCounter = 0;
 
 let num1 = 0;
 let num2 = 0;
+let result = 0;
 
 let sign = '';
 
 let dig = [];
 let i = 0;
+
+let isCalculated = false;
 
 
 const dig0 = document.querySelector('#dig0');
@@ -31,104 +34,97 @@ const plusSign = document.querySelector('#plus');
 const clearSign = document.querySelector('#clear');
 const asteriskSign = document.querySelector('#asterisk');
 
+const enterDigit = function(digit) {
+    if(numCounter < 2 && !isCalculated) {
+        outputDisplay.textContent += `${digit}`;
+        numTmp += `${digit}`;
+    } else if (isCalculated) {
+        isCalculated = false;
+        outputDisplay.textContent += `${digit}`;
+        numTmp = `${digit}`;
+    }   
+}
+
 const initializeDigitButtons = function() {
     dig0.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '0';
-            numTmp += '0';
-        }
+        enterDigit(0);
     });
     
     dig1.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '1';
-            numTmp += '1';
-        }
+        enterDigit(1);
     });
     
     dig2.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '2';
-            numTmp += '2';
-        }
+        enterDigit(2);
     });
     
     dig3.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '3';
-            numTmp += '3';
-        }
+        enterDigit(3);
     });
     
     dig4.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '4';
-            numTmp += '4';
-        }
+        enterDigit(4);
     });
     
     dig5.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '5';
-            numTmp += '5';
-        }
+        enterDigit(5);
     });
     
     dig6.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '6';
-            numTmp += '6';
-        }
+        enterDigit(6);
     });
     
     dig7.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '7';
-            numTmp += '7';
-        }
+        enterDigit(7);
     });
     
     dig8.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '8';
-            numTmp += '8';
-        }
+        enterDigit(8);
     });
     
     dig9.addEventListener('click', () => {
-        if(numCounter < 2) {
-            outputDisplay.textContent += '9';
-            numTmp += '9';
-        }
+        enterDigit(9);
     });
 }
 
 initializeDigitButtons();
 
 plusSign.addEventListener('click', () => {
-    if(numCounter === 0) {
+    if(numCounter === 0 && !isCalculated) {
         num1 = parseFloat(numTmp);
         numTmp = 0;
         outputDisplay.textContent += '+';
         sign = '+';
         numCounter++; 
-    }  
+    } else if (isCalculated) {
+        num1 = result;
+        outputDisplay.textContent += '+';
+        sign = '+';
+    }
 });
 
 asteriskSign.addEventListener('click', () => {
-    num1 = parseFloat(numTmp);
-    numTmp = 0;
-    outputDisplay.textContent += '*';
-    sign = '*'; 
-    numCounter++;  
+    if(numCounter === 0 && !isCalculated) {
+        num1 = parseFloat(numTmp);
+        numTmp = 0;
+        outputDisplay.textContent += '*';
+        sign = '*';
+        numCounter++; 
+    } else if (isCalculated) {
+        num1 = result;
+        outputDisplay.textContent += '*';
+        sign = '*';
+    } 
 });
 
 
 equalsSign.addEventListener('click', () => {
     num2 = parseFloat(numTmp);
     numTmp = 0;
-    outputDisplay.textContent = operate(sign, num1, num2);
+    result = operate(sign, num1, num2);
+    outputDisplay.textContent = result;
     numCounter = 0;
+    isCalculated = true;
 });
 
 clearSign.addEventListener('click', () => {
@@ -136,6 +132,7 @@ clearSign.addEventListener('click', () => {
     sign = '';
     num1 = 0;
     num2 = 0;
+    isCalculated = false;
 });
 
 const add = function(a, b) {
