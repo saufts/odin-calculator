@@ -28,8 +28,10 @@ const dig9 = document.querySelector('#dig9');
 
 const equalsSign = document.querySelector('#equals');
 const plusSign = document.querySelector('#plus');
-const clearSign = document.querySelector('#clear');
+const minusSign = document.querySelector('#minus');
 const asteriskSign = document.querySelector('#asterisk');
+const divideSign = document.querySelector('#divide');
+const clearSign = document.querySelector('#clear');
 
 const enterDigit = function(digit) {
     if(numCounter < 2 && !isCalculated) {
@@ -104,10 +106,19 @@ const initializeSymbolButtons = function() {
     plusSign.addEventListener('click', () => {
         enterOperator('+');
     });
-    
+
+    minusSign.addEventListener('click', () => {
+        enterOperator('-');
+    });
+
     asteriskSign.addEventListener('click', () => {
         enterOperator('*');
     });
+
+    divideSign.addEventListener('click', () => {
+        enterOperator('/');
+    });
+
 }
 
 initializeDigitButtons();
