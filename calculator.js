@@ -39,7 +39,7 @@ const enterDigit = function(digit) {
         numTmp += `${digit}`;
     } else if (isCalculated) {
         isCalculated = false;
-        outputDisplay.textContent += `${digit}`;
+        outputDisplay.textContent = `${digit}`;
         numTmp = `${digit}`;
     }   
 }
@@ -56,6 +56,7 @@ const enterOperator = function(operator) {
         num1 = result;
         outputDisplay.textContent += `${operator}`;
         sign = `${operator}`;
+        isCalculated = false;
     }
 }
 
@@ -138,6 +139,7 @@ clearSign.addEventListener('click', () => {
     sign = '';
     num1 = 0;
     num2 = 0;
+    result = 0;
     isCalculated = false;
 });
 
