@@ -39,6 +39,7 @@ const enterDigit = function(digit) {
         numTmp += `${digit}`;
     } else if (isCalculated) {
         isCalculated = false;
+        result = 0;
         outputDisplay.textContent = `${digit}`;
         numTmp = `${digit}`;
     }   
@@ -132,6 +133,7 @@ equalsSign.addEventListener('click', () => {
     outputDisplay.textContent = result;
     numCounter = 0;
     isCalculated = true;
+    sign = '';
 });
 
 clearSign.addEventListener('click', () => {
