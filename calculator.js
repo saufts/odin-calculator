@@ -45,25 +45,20 @@ const enterDigit = function(digit) {
     }   
 }
 
-const enterOperator = function(operator) {
-    if(numCounter === 0 && !isCalculated && numTmp !== 0) {
+               const enterOperator = function(operator) {
+    if(numCounter < 1 && !isCalculated && numTmp !== 0) {
         num1 = parseFloat(numTmp);
         numTmp = 0;
         outputDisplay.textContent += `${operator}`;
         sign = `${operator}`;
         numCounter++; 
         
-    } else if (isCalculated) {
+    } else if (isCalculated && numCounter < 1) {
         num1 = result;
         outputDisplay.textContent += `${operator}`;
         sign = `${operator}`;
         isCalculated = false;
-    }
-    else if(numCounter === 1 && !isCalculated && numTmp !== 0) {
-        num1 = parseFloat(numTmp);
-        numTmp = 0;
-        outputDisplay.textContent += `${operator}`;
-        sign = `${operator}`;     
+        numCounter++;
     }
 }
 
