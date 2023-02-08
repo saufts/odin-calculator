@@ -156,7 +156,7 @@ equalsSign.addEventListener('click', () => {
         outputDisplay.textContent = 'huh?';  
     }
     else {
-        outputDisplay.textContent = result;
+        outputDisplay.textContent = result.toFixed(10);
     }
     numCounter = 0;
     isCalculated = true;
