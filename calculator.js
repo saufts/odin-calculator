@@ -32,6 +32,7 @@ const minusSign = document.querySelector('#minus');
 const asteriskSign = document.querySelector('#asterisk');
 const divideSign = document.querySelector('#divide');
 const clearSign = document.querySelector('#clear');
+const comma = document.querySelector('#comma');
 
 const enterDigit = function(digit) {
     if(numCounter < 2 && !isCalculated) {
@@ -45,20 +46,36 @@ const enterDigit = function(digit) {
     }   
 }
 
-               const enterOperator = function(operator) {
+const addComma = function() {
+    if(numCounter < 2 && !isCalculated) {
+        outputDisplay.textContent += `.`;
+        numTmp += `.`;
+        comma.disabled = true;
+
+    } else if (isCalculated) {
+        isCalculated = false;
+        result = 0;
+        outputDisplay.textContent = `.`;
+        numTmp = `.`;
+    }   
+}
+
+const enterOperator = function(operator) {
     if(numCounter < 1 && !isCalculated && numTmp !== 0) {
         num1 = parseFloat(numTmp);
         numTmp = 0;
         outputDisplay.textContent += `${operator}`;
         sign = `${operator}`;
         numCounter++; 
+        comma.disabled = false;
         
-    } else if (isCalculated && numCounter < 1) {
+    } else if (isCalculated && numCounter < 1) { //case, after the equals button has been pressed, and the result become first number in the evaluation
         num1 = result;
         outputDisplay.textContent += `${operator}`;
         sign = `${operator}`;
         isCalculated = false;
         numCounter++;
+        comma.disabled = false;
     }
 }
 
@@ -122,6 +139,10 @@ const initializeSymbolButtons = function() {
         enterOperator('/');
     });
 
+    comma.addEventListener('click', () => {
+        addComma();
+    });
+
 }
 
 initializeDigitButtons();
@@ -131,7 +152,12 @@ equalsSign.addEventListener('click', () => {
     num2 = parseFloat(numTmp);
     numTmp = 0;
     result = operate(sign, num1, num2);
-    outputDisplay.textContent = result;
+    if(result === undefined) {
+        outputDisplay.textContent = 'huh?';  
+    }
+    else {
+        outputDisplay.textContent = result;
+    }
     numCounter = 0;
     isCalculated = true;
     sign = '';
@@ -143,7 +169,10 @@ clearSign.addEventListener('click', () => {
     num1 = 0;
     num2 = 0;
     result = 0;
+    numCounter = 0;
+    numTmp = 0;
     isCalculated = false;
+    comma.disabled = false;
 });
 
 const add = function(a, b) {
