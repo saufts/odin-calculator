@@ -46,7 +46,7 @@ const enterDigit = function(digit) {
 }
 
 const enterOperator = function(operator) {
-    if(numCounter === 0 && !isCalculated) {
+    if(numCounter === 0 && !isCalculated && numTmp !== 0) {
         num1 = parseFloat(numTmp);
         numTmp = 0;
         outputDisplay.textContent += `${operator}`;
@@ -58,6 +58,12 @@ const enterOperator = function(operator) {
         outputDisplay.textContent += `${operator}`;
         sign = `${operator}`;
         isCalculated = false;
+    }
+    else if(numCounter === 1 && !isCalculated && numTmp !== 0) {
+        num1 = parseFloat(numTmp);
+        numTmp = 0;
+        outputDisplay.textContent += `${operator}`;
+        sign = `${operator}`;     
     }
 }
 
